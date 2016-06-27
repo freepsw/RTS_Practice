@@ -19,6 +19,7 @@ export FLUME_HOME=/home/rts/apps/apache-flume-1.6.0-bin
 export FLUME_CONF_DIR=$FLUME_HOME/conf
 export FLUME_CLASSPATH=$FLUME_CONF_DIR
 export PATH=$PATH:$FLUME_HOME/bin
+> source ~/.bash_profile //변경된 내용을 shell에 적용
 ``` 
  * Step 3: Flume Config Setting
 ```
