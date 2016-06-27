@@ -14,7 +14,7 @@ http://www.slideshare.net/madvirus/flume-29149433
 ```
  * Step 2: Configure Environment Setting
 ```
-> vi ~/.bash_profile
+> vi ~/.bash_profile  //아래의 내용을 파일 끝에 추가한다.
 export FLUME_HOME=/home/rts/apps/apache-flume-1.6.0-bin
 export FLUME_CONF_DIR=$FLUME_HOME/conf
 export FLUME_CLASSPATH=$FLUME_CONF_DIR
