@@ -5,7 +5,7 @@
 http://www.slideshare.net/madvirus/flume-29149433
 - Let's install
  * Step 1: Download latest Flume release from Apache [Website](http://archive.apache.org/dist/flume/)
->
+ 
 ————-
 “`
 var i = 0
