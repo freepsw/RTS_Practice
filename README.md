@@ -20,6 +20,14 @@ export FLUME_CONF_DIR=$FLUME_HOME/conf
 export FLUME_CLASSPATH=$FLUME_CONF_DIR
 export PATH=$PATH:$FLUME_HOME/bin
 ``` 
+ * Step 3: Flume Config Setting
+```
+> cd /home/rts/apps/apache-flume-1.6.0-bin/conf
+> cp flume-env.sh.template flume-env.sh
+> vi flume-env.sh  // 아래의 내용을 주석제거하고, java의 경우는 JAVA_HOME 설정을 그래도 활용
+$JAVA_OPTS="-Xms500m -Xmx1000m -Dcom.sun.management.jmxremote"
+export JAVA_HOME=/opt/jdk1.8.0_91
+```
 
 
 
