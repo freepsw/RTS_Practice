@@ -33,6 +33,6 @@ function fancyAlert(arg) {
     }
 
 
-def foo():
+  def foo():
     if not bar:
         return True
