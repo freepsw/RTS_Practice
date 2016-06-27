@@ -1,2 +1,2 @@
 # Technical Guide for processing realtime data
-## 수집 (Apache Flume)
+## 1. Collection(Apache Flume)
