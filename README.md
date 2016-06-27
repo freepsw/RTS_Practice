@@ -6,9 +6,20 @@ http://www.slideshare.net/madvirus/flume-29149433
 - Let's install
  * Step 1: Download latest Flume release from Apache [Website](http://archive.apache.org/dist/flume/)
 ```
->  wget http://archive.apache.org/dist/flume/stable/apache-flume-1.6.0-bin.tar.gz
->  wget http://archive.apache.org/dist/flume/stable/apache-flume-1.6.0-bin.tar.gz
+> cd ~
+> mkdir apps
+> cd apps
+> wget http://archive.apache.org/dist/flume/stable/apache-flume-1.6.0-bin.tar.gz
+> sudo tar -xzvf apache-flume-1.6.0-bin.tar.gz
 ```
+ * Step 2: Configure Environment Setting
+```
+> vi ~/.bash_profile
+export FLUME_HOME=/home/rts/apps/apache-flume-1.6.0-bin
+export FLUME_CONF_DIR=$FLUME_HOME/conf
+export FLUME_CLASSPATH=$FLUME_CONF_DIR
+export PATH=$PATH:$FLUME_HOME/bin
+``` 
 
 
 
