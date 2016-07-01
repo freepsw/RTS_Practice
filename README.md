@@ -4,7 +4,7 @@
 - Flume Quick Glance
 http://www.slideshare.net/madvirus/flume-29149433 
 
-### Let's install
+### 1-1. Let's install
  * Step 1: Download latest Flume release from Apache [Website](http://archive.apache.org/dist/flume/)
 ```
 > cd ~
@@ -31,6 +31,8 @@ $JAVA_OPTS="-Xms500m -Xmx1000m -Dcom.sun.management.jmxremote"
 export JAVA_HOME=/opt/jdk1.8.0_91
 ```
 > flume-ng --help //명령어가 정상적으로 동작하는지 확인
+
+### 1-2. Flume Tutorial [link] (http://www.tutorialspoint.com/apache_flume/)
 
 
 # mark down examples
