@@ -1,8 +1,14 @@
 # Technical Guide for processing realtime data
 ## 1. Collection(Apache Flume)
-
 - Flume Quick Glance
 http://www.slideshare.net/madvirus/flume-29149433 
+
+- Why Flume?
+  - 단순히 log를 수집하는것이 아니라 분산환경에서 다양한 유스케이스를 실행하는데 최적화 됨.
+  - 예를 들면, 
+    1. sensor들의 정보를 수집해서 분석
+    2. newwork device들의 성능을 모니터링
+    3. 신뢰성, 안정정, 확장성을 지원하는 다양한 기능
 
 ## 2. Collection(Apache Kafka)
 
