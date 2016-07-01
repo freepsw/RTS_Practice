@@ -67,12 +67,19 @@ TwitterAgent.channels.MemChannel.transactionCapacity    = 100
 TwitterAgent.sources.Twitter.channels = MemChannel
 TwitterAgent.sinks.loggerSink.channel = MemChannel
 ```
+  - 실행
+  ```
+  > bin/flume-ng agent --conf ./conf/ -f conf/twitter.conf Dflume.root.logger=DEBUG,console -n TwitterAgent
+  ```
+  - 
   - 추가 설정
     * twitter에서 조회한 데이터는 FLUME_HOME/logs/flume.log에 저장됨.
     * 이 flume.log를 열어보면 "body: 4F 62 6A 01 02 16 61 76 72 6F 2E 73 63 68 65 6D"와 같은 문자열만 출력됨.
     * 해결방안 
-    * conf/log4j.properties 파일에서 "flume.root.logger=ALL,LOGFILE"로 변경
-  - 
+      * conf/log4j.properties 파일에서 "flume.root.logger=ALL,LOGFILE"로 변경
+      * twitter
+  - 결과 확인
+   * TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql에서 설정한 keyword에 대항하는 내용만 추출하고 있음.
 
 # mark down examples
 As Kanye West said:
