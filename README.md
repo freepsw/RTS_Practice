@@ -41,7 +41,7 @@ export JAVA_HOME=/opt/jdk1.8.0_91
     3. 신뢰성, 안정정, 확장성을 지원하는 다양한 기능
  * Fetching Twitter Data
   - sink를 logggerSink로 변경
-  '''
+```
 # Naming the components on the current agent.
 TwitterAgent.sources = Twitter
 TwitterAgent.channels = MemChannel
@@ -67,7 +67,7 @@ TwitterAgent.channels.MemChannel.transactionCapacity    = 100
 TwitterAgent.sources.Twitter.channels = MemChannel
 TwitterAgent.sinks.loggerSink.channel = MemChannel
 
-'''
+```
 
 
 # mark down examples
