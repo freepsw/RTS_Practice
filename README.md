@@ -39,7 +39,7 @@ export JAVA_HOME=/opt/jdk1.8.0_91
     1. sensor들의 정보를 수집해서 분석
     2. newwork device들의 성능을 모니터링
     3. 신뢰성, 안정정, 확장성을 지원하는 다양한 기능
- * Fetching Twitter Data
+ * Sample 1 :  Fetching Twitter Data
   - sink를 logggerSink로 변경
 ```
 # Naming the components on the current agent.
