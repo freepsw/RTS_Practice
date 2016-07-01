@@ -112,15 +112,15 @@ TwitterAgent.sinks.loggerSink.channel = MemChannel
  * Execute Flume
 
   ```
-bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/netcat.conf --name NetcatAgent -Dflume.root.logger=INFO,console
+> bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/netcat.conf --name NetcatAgent -Dflume.root.logger=INFO,console
   ```
   
  * Send message using Telnet
-
-    ```
+ 
+ ```
     > curl telnet://localhost:56565 
 connected 
-    ```
+  ```
   
 #### Sample 3 : Flume Interceptor [link](http://hadoopathome.logdown.com/posts/293904-apache-flume-interceptors-modifying-the-event-body)
  * Flume Event는 header + body로 구성됨  
@@ -168,6 +168,7 @@ connected
    > bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/interceptorNetcat.conf --name InNetcatAgent -Dflume.root.logger=INFO,console
   ```
  * telnet 실행
+
   ```
   > curl telnet://localhost:56565
     test
