@@ -115,7 +115,7 @@ TwitterAgent.sinks.loggerSink.channel = MemChannel
 bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/netcat.conf --name NetcatAgent -Dflume.root.logger=INFO,console
   ```
   
-  * Send message using Telnet
+ * Send message using Telnet
 
     ```
     > curl telnet://localhost:56565 
