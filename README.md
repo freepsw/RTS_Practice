@@ -33,6 +33,12 @@ export JAVA_HOME=/opt/jdk1.8.0_91
 > flume-ng --help //명령어가 정상적으로 동작하는지 확인
 
 ### 1-2. Flume Tutorial [link] (http://www.tutorialspoint.com/apache_flume/)
+ * Why Flume?
+  - 단순히 log를 수집하는것이 아니라 분산환경에서 다양한 유스케이스를 실행하는데 최적화 됨.
+  - 예를 들면, 
+    1. sensor들의 정보를 수집해서 분석
+    2. newwork device들의 성능을 모니터링
+    3. 신뢰성, 안정정, 확장성을 지원하는 다양한 기능
 
 
 # mark down examples
