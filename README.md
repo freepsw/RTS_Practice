@@ -162,7 +162,17 @@ connected
   InNetcatAgent.sources.Netcat.interceptors.i1.type = uk.co.hadoopathome.flume.timestampbodyinterceptor.TimestampBodyInterceptor$Builder
   InNetcatAgent.sources.Netcat.interceptors.i1.separator = , //구분자를 ","로 지정함.
   ```
-
+  
+ * flume 실행
+   ```
+bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/interceptorNetcat.conf --name InNetcatAgent -Dflume.root.logger=INFO,console
+  ```
+ * telnet 실행
+  ```
+curl telnet://localhost:56565
+test
+OK
+  ```
 
 # mark down examples
 As Kanye West said:
