@@ -49,10 +49,10 @@ TwitterAgent.sinks = loggerSink  //hadoop를 설치하지 않았기 때문에 lo
 
 # Describing/Configuring the source
 TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
-TwitterAgent.sources.Twitter.consumerKey = ptdZbwUAQ3bxQrmVDYwoQ8zB7
-TwitterAgent.sources.Twitter.consumerSecret = oTXIWoObQgcQ7bwdi8kvEZoM3C1Dc5MVGIZnMIq6wGFPz5zzGK
-TwitterAgent.sources.Twitter.accessToken = 136281373-Dw6OodLTbBm3EOwrGObS3IDlcJ81RaER3dRT3kZ9
-TwitterAgent.sources.Twitter.accessTokenSecret = MstWCCGZ7RQ2w4iBQelN2IgRMWaiOKdULUrSUl1O1yTDZ
+TwitterAgent.sources.Twitter.consumerKey = consumerKey
+TwitterAgent.sources.Twitter.consumerSecret = consumerSecret
+TwitterAgent.sources.Twitter.accessToken = accessToken
+TwitterAgent.sources.Twitter.accessTokenSecret = accessTokenSecret
 TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql
 
 # Describing/Configuring the sink
