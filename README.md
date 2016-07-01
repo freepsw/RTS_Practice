@@ -110,9 +110,20 @@ TwitterAgent.sinks.loggerSink.channel = MemChannel
   NetcatAgent.sinks.LoggerSink.channel = MemChannel
   ```
  * Execute Flume
+
   ```
 bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/netcat.conf --name NetcatAgent -Dflume.root.logger=INFO,console
   ```
+  
+  * Send message using Telnet
+
+    ```
+    > curl telnet://localhost:56565 
+connected 
+    ```
+  
+
+
 # mark down examples
 As Kanye West said:
 
