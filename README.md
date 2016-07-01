@@ -165,13 +165,13 @@ connected
   
  * flume 실행
    ```
-bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/interceptorNetcat.conf --name InNetcatAgent -Dflume.root.logger=INFO,console
+   > bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/interceptorNetcat.conf --name InNetcatAgent -Dflume.root.logger=INFO,console
   ```
  * telnet 실행
   ```
-curl telnet://localhost:56565
-test
-OK
+  > curl telnet://localhost:56565
+    test
+    OK
   ```
 
 # mark down examples
