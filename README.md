@@ -84,8 +84,35 @@ TwitterAgent.sinks.loggerSink.channel = MemChannel
    * TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql에서 설정한 keyword에 대항하는 내용만 추출하고 있음.
 
 #### Sample 2 : NetCat Source
-  - 
-
+ * Scenario : NecCat source를 이용하여 수집된 데이터를 logger를 통해 저장하는 예제
+ * Configuring Flume
+  ```
+  #Naming the components on the current agent
+  NetcatAgent.sources = Netcat
+  NetcatAgent.channels = MemChannel
+  NetcatAgent.sinks = LoggerSink
+  
+  # Describing/Configuring the source
+  NetcatAgent.sources.Netcat.type = netcat
+  NetcatAgent.sources.Netcat.bind = localhost
+  NetcatAgent.sources.Netcat.port = 56565
+  
+  # Describing/Configuring the sink
+  NetcatAgent.sinks.LoggerSink.type = logger
+  
+  # Describing/Configuring the channel
+  NetcatAgent.channels.MemChannel.type = memory
+  NetcatAgent.channels.MemChannel.capacity = 1000
+  NetcatAgent.channels.MemChannel.transactionCapacity = 100
+  
+  # Bind the source and sink to the channel
+  NetcatAgent.sources.Netcat.channels = MemChannel
+  NetcatAgent.sinks.LoggerSink.channel = MemChannel
+  ```
+ * Execute Flume
+  ```
+bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/netcat.conf --name NetcatAgent -Dflume.root.logger=INFO,console
+  ```
 # mark down examples
 As Kanye West said:
 
