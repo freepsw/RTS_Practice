@@ -45,7 +45,7 @@ export JAVA_HOME=/opt/jdk1.8.0_91
 # Naming the components on the current agent.
 TwitterAgent.sources = Twitter
 TwitterAgent.channels = MemChannel
-TwitterAgent.sinks = loggerSink
+TwitterAgent.sinks = loggerSink  //hadoop를 설치하지 않았기 때문에 logger로 변경함. 
 
 # Describing/Configuring the source
 TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
@@ -66,9 +66,13 @@ TwitterAgent.channels.MemChannel.transactionCapacity    = 100
 # Binding the source and sink to the channel
 TwitterAgent.sources.Twitter.channels = MemChannel
 TwitterAgent.sinks.loggerSink.channel = MemChannel
-
 ```
-
+  - 추가 설정
+    * twitter에서 조회한 데이터는 FLUME_HOME/logs/flume.log에 저장됨.
+    * 이 flume.log를 열어보면 "body: 4F 62 6A 01 02 16 61 76 72 6F 2E 73 63 68 65 6D"와 같은 문자열만 출력됨.
+    * 해결방안 
+    * conf/log4j.properties 파일에서 "flume.root.logger=ALL,LOGFILE"로 변경
+  - 
 
 # mark down examples
 As Kanye West said:
