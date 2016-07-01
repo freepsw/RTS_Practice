@@ -82,7 +82,7 @@ TwitterAgent.sinks.loggerSink.channel = MemChannel
   - 결과 확인
    * TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql에서 설정한 keyword에 대항하는 내용만 추출하고 있음.
 
- * Sample 2 : NetCat Source
+* Sample 2 : NetCat Source
   - 
 
 # mark down examples
