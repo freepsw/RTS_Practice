@@ -67,7 +67,8 @@ TwitterAgent.channels.MemChannel.transactionCapacity    = 100
 TwitterAgent.sources.Twitter.channels = MemChannel
 TwitterAgent.sinks.loggerSink.channel = MemChannel
 ```
-  - 실행
+  - 실행 
+
   ```
   > bin/flume-ng agent --conf ./conf/ -f conf/twitter.conf Dflume.root.logger=DEBUG,console -n TwitterAgent
   ```
