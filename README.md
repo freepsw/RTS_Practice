@@ -39,6 +39,35 @@ export JAVA_HOME=/opt/jdk1.8.0_91
     1. sensor들의 정보를 수집해서 분석
     2. newwork device들의 성능을 모니터링
     3. 신뢰성, 안정정, 확장성을 지원하는 다양한 기능
+ * Fetching Twitter Data
+  - sink를 logggerSink로 변경
+  '''
+# Naming the components on the current agent.
+TwitterAgent.sources = Twitter
+TwitterAgent.channels = MemChannel
+TwitterAgent.sinks = loggerSink
+
+# Describing/Configuring the source
+TwitterAgent.sources.Twitter.type = org.apache.flume.source.twitter.TwitterSource
+TwitterAgent.sources.Twitter.consumerKey = ptdZbwUAQ3bxQrmVDYwoQ8zB7
+TwitterAgent.sources.Twitter.consumerSecret = oTXIWoObQgcQ7bwdi8kvEZoM3C1Dc5MVGIZnMIq6wGFPz5zzGK
+TwitterAgent.sources.Twitter.accessToken = 136281373-Dw6OodLTbBm3EOwrGObS3IDlcJ81RaER3dRT3kZ9
+TwitterAgent.sources.Twitter.accessTokenSecret = MstWCCGZ7RQ2w4iBQelN2IgRMWaiOKdULUrSUl1O1yTDZ
+TwitterAgent.sources.Twitter.keywords = tutorials point,java, bigdata, mapreduce, mahout, hbase, nosql
+
+# Describing/Configuring the sink
+TwitterAgent.sinks.loggerSink.type = logger
+
+# Describing/Configuring the channel TwitterAgent.channels.MemChannel.type = memory
+TwitterAgent.channels.MemChannel.type                   = memory
+TwitterAgent.channels.MemChannel.capacity               = 10000
+TwitterAgent.channels.MemChannel.transactionCapacity    = 100
+
+# Binding the source and sink to the channel
+TwitterAgent.sources.Twitter.channels = MemChannel
+TwitterAgent.sinks.loggerSink.channel = MemChannel
+
+'''
 
 
 # mark down examples
