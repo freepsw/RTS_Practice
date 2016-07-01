@@ -25,11 +25,11 @@ export PATH=$PATH:$FLUME_HOME/bin
 ```
 > cd /home/rts/apps/apache-flume-1.6.0-bin/conf
 > cp flume-env.sh.template flume-env.sh
-> vi flume-env.sh  // 아래의 내용을 주석제거하고, java의 경우는 JAVA_HOME 설정을 그래도 활용
+> vi flume-env.sh  // 아래의 내용을 추가한다. java의 경우는 JAVA_HOME 설정을 그래도 활용
 $JAVA_OPTS="-Xms500m -Xmx1000m -Dcom.sun.management.jmxremote"
 export JAVA_HOME=/opt/jdk1.8.0_91
 ```
-
+> flume-ng --help //명령어가 정상적으로 동작하는지 확인
 
 
 # mark down examples
