@@ -11,7 +11,11 @@ http://www.slideshare.net/madvirus/flume-29149433
     3. 신뢰성, 안정정, 확장성을 지원하는 다양한 기능
 
 ## 2. Collection(Apache Kafka)
-
+- Why Kafka?
+  - kafka는 기존 message queue에서 사용하는 용도(messaging, website activity tracking, log aggregation, operational metrics, stream processing)로 주로 활용되고 있다.  
+  - 그럼 왜 kafka를 써야하는 걸까?
+  - 대부분의 message queue의 한계(fault tolerance, memory 용량에 따른 throughtput)를 극복할 수 있는 용도
+  - disk기반으로 message 유실을 없애고, broker-partition을 활용하여 100K+/sec 성능을 충분히 보장
 
 
 # mark down examples
