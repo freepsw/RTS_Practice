@@ -125,6 +125,34 @@ connected
 #### Sample 3 : Flume Interceptor [link](http://hadoopathome.logdown.com/posts/293904-apache-flume-interceptors-modifying-the-event-body)
  * Flume Event는 header + body로 구성됨  
  ![flume evtns](http://i.imgur.com/uIe8eQE.png)
+ * interceptor는 body 수정(filter, extract, add information ...)
+ * Secnario : Sample2에 Interceptor를 삽입하여 timestamp가 출력되도록 한다.
+ * java로 interceptor class를 구현하고 jar로 생성하여, FLUME_HOME/lib 아래로 복사한다.
+  * [source project](https://github.com/benwatson528/flume-timestamp-body-interceptor)
+  * 아래의 함수가 실제 event를 interceptor하여 조작하는 함수
+  ```
+  @Override
+	public Event intercept(Event event) {
+		byte[] eventBody = event.getBody();
+		event.setBody(appendTimestampToBody(eventBody, System.nanoTime()));
+		return event;
+	}
+	
+	protected byte[] appendTimestampToBody(byte[] startEventBody, long time) {
+		try {
+			this.timeBytes = Long.toString(time).getBytes();
+			this.outputBodyLength 	= startEventBody.length + this.separator.length + this.timeBytes.length;
+			this.outputStream 		= new ByteArrayOutputStream(this.outputBodyLength);
+			this.outputStream.write(startEventBody);
+			this.outputStream.write(this.separator);
+			this.outputStream.write(this.timeBytes);
+			return this.outputStream.toByteArray();
+		} catch (IOException ex) {
+			this.logger.error("Couldn't add timestamp to body", ex);
+			throw new RuntimeException("Couldn't add timestamp to body", ex);
+		}
+	}
+  ```
 
 # mark down examples
 As Kanye West said:
