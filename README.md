@@ -122,7 +122,9 @@ bin/flume-ng agent --conf $FLUME_HOME/conf --conf-file $FLUME_HOME/conf/netcat.c
 connected 
     ```
   
-
+#### Sample 3 : Flume Interceptor [link](http://hadoopathome.logdown.com/posts/293904-apache-flume-interceptors-modifying-the-event-body)
+ * Flume Event는 header + body로 구성됨  
+ ![flume evtns](http://i.imgur.com/uIe8eQE.png)
 
 # mark down examples
 As Kanye West said:
