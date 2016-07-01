@@ -153,6 +153,16 @@ connected
 		}
 	}
   ```
+ * config 파일 수정 (intercepor 추가)
+  ```
+  > cp netcat.conf interceptorNetcat.conf
+  
+  # Describing/Configuring the interceptor
+  InNetcatAgent.sources.Netcat.interceptors = i1
+  InNetcatAgent.sources.Netcat.interceptors.i1.type = uk.co.hadoopathome.flume.timestampbodyinterceptor.TimestampBodyInterceptor$Builder
+  InNetcatAgent.sources.Netcat.interceptors.i1.separator = , //구분자를 ","로 지정함.
+  ```
+
 
 # mark down examples
 As Kanye West said:
