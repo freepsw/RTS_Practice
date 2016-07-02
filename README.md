@@ -19,6 +19,7 @@ http://www.slideshare.net/madvirus/flume-29149433
 
 
 # mark down examples
+https://guides.github.com/features/mastering-markdown/
 As Kanye West said:
 
 > We're living the future so
