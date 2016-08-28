@@ -40,6 +40,7 @@ http://www.slideshare.net/madvirus/flume-29149433
 
 - 설치 가이드 (standalone cluster)
  * http://nberserk.github.io/2015/06/16/spark.html
+
  > - master가 될 컴퓨터에 spark 2.0.0 버전을 다운받아서 압축을 푼다
  > - conf/spark-env.sh 에
  > - SPARK_MASTER_IP 에 master ip 기입
