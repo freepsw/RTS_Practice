@@ -23,7 +23,7 @@ http://www.slideshare.net/madvirus/flume-29149433
 - inetlliJ IDE를 활용한 사례 참고
 - https://github.com/freepsw/java_scala
 
-# 4. Realtime Processing (Apache Spark - Streaming)
+## 4. Realtime Processing (Apache Spark - Streaming)
 - Why spark?
  - 유사한 straming sw(storm, flink, samza 등)들과 실시간 분산처리 성능은 유사하고,
  - 또한 데이터의 유실을 방지하는 exactly once도 유사하게 지원한다.
