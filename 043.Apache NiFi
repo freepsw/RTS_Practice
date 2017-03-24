@@ -1,0 +1,18 @@
+# Apache NiFI examples
+
+## 1. intall
+```
+> cd ~/apps
+> wget http://apache.mirror.cdnetworks.com/nifi/1.1.2/nifi-1.1.2-bin.tar.gz
+> tar xvf nifi-1.1.2-bin.tar.gz
+```
+
+## 2. run Apache NiFi
+```
+> cd nifi-1.1.2
+> bin/nifi.sh start
+```
+
+
+## 3. connect to Web browser
+- http://<ip>:8080/nifi/
