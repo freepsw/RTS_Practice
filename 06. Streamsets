@@ -1,8 +1,7 @@
 # Streamsets examples
 
 ## 1. intall
- - (https://streamsets.com/blog/getting-started-streamsets-data-collector/
- ) 참고
+ - (https://streamsets.com/blog/getting-started-streamsets-data-collector/) 참고
 
 ```
 > cd ~/apps
