@@ -9,17 +9,18 @@
 > tar xvzf streamsets-datacollector-core-2.4.1.0.tgz
 ```
 
-## 2. run Apache NiFi
+## 2. run Streamsets
 ```
 > cd streamsets-datacollector-2.4.1.0
 > bin/streamsets dc
-  Running on URI : 'http://dev04:18630'
-```
+  Running on URI : http://<ip>18630
+
+``''
  - 실행시 아래와 같은 오류가 나오면 max open file 수를 늘려야 함.
  - "Configuration of maximum open file limit is too low"
 
  - centos에서 해당 값을 증가하는 방법
-```
+
  # 현재 open file limit 확인
  > ulimit -Sn
  1024
@@ -40,6 +41,53 @@
  500000
 ```
 
-
 ## 3. connect to Web browser
-- http://172.16.118.134:18630/
+- http://<ip>:18630
+
+
+## 4. Before we begin
+### 1) download sample data
+```
+ > cd ~
+ > mkdir -p ~/tutorial/origin
+ > mkdir -p ~/tutorial/destination
+ > mkdir -p ~/tutorial/error
+
+ > cd ~/tutorial/origin
+ > wget https://www.streamsets.com/documentation/datacollector/sample_data/tutorial/nyc_taxi_data.csv
+
+```
+
+## 5. Script
+### 1) Jython Script
+
+```python
+try:
+  for record in records:
+    cc = record.value['credit_card']
+    if cc == '':
+      error.write(record, "Payment type was CRD, but credit card was null")
+      continue
+
+    cc_type = ''
+    if cc.startswith('4'):
+      cc_type = 'Visa'
+    elif cc.startswith(('51','52','53','54','55')):
+      cc_type = 'MasterCard'
+    elif cc.startswith(('34','37')):
+      cc_type = 'AMEX'
+    elif cc.startswith(('300','301','302','303','304','305','36','38')):
+      cc_type = 'Diners Club'
+    elif cc.startswith(('6011','65')):
+      cc_type = 'Discover'
+    elif cc.startswith(('2131','1800','35')):
+      cc_type = 'JCB'
+    else:
+      cc_type = 'Other'
+
+    record.value['credit_card_type'] = cc_type
+
+    output.write(record)
+except Exception as e:
+  error.write(record, e.message
+```
