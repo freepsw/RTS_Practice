@@ -1,0 +1,6 @@
+{
+    "partitions": [
+    {"topic": "kv_topic", "partition":0, "offset": 2}
+    ], 
+    "version":1
+}
