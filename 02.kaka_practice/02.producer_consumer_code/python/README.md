@@ -33,12 +33,10 @@
 ### Basic Producer Test 
 #### Run the kafka console consumer
 ```
-> cd $KAFKA_HOME
 > bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my_topic --from-beginning
 ```
 
 #### Run the python (Producer)
-- 
 ```
 > cd ~/python_kafka 
 > source kafka_virtualenv/bin/activate
@@ -53,7 +51,6 @@ Message delivered to my_topic [1]
 
 ### Basic Consumer Test 
 #### Run the python (Consumer)
-- 
 ```
 > cd ~/python_kafka 
 > source kafka_virtualenv/bin/activate
@@ -78,6 +75,12 @@ Received message: test-msg
 > python admin.py 
 Topic my_topic_new1 created
 Topic my_topic_new2 created
+
+> cd $KAFKA_HOME
+> bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+my_topic_new1
+my_topic_new2
+
 ```
 
 ## Advanced Producer/Consumer/Admin code 
@@ -109,8 +112,6 @@ b'test-msg'
 > source kafka_virtualenv/bin/activate
 
 > vi producer_detail.py 
-
-> python producer_detail.py 
 
 > python producer_detail.py localhost my_topic
 new msg
