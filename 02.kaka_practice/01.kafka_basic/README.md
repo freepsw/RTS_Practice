@@ -13,6 +13,12 @@
 > cd $KAFKA_HOME
 > bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 2 --topic kv_topic
 
+> bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+__consumer_offsets
+kv_topic
+test
+
+
 > bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic kv_topic \
 --property "parse.key=true" \
 --property "key.separator=:" \
@@ -43,6 +49,7 @@ msg7
 
 ### Consumer Group 확인하기
 ```
+> cd $KAFKA_HOME
 > bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 my-group
 console-consumer-60786
@@ -50,11 +57,10 @@ console-consumer-60786
 > bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group my-group --describe
 Consumer group 'my-group' has no active members.
 
-GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID     HOST            CLIENT-ID
-my-group        kv_topic        0          3               3               0               -               -               -
-my-group        kv_topic        1          2               2               0               -               -               -
+GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                              HOST            CLIENT-ID
+my-group        kv_topic        0          4               4               0               consumer-my-group-1-354532ac-7912-4009-8ca0-bf72b52f53d8 /10.146.0.4     consumer-my-group-1
+my-group        kv_topic        1          3               3               0               consumer-my-group-1-354532ac-7912-4009-8ca0-bf72b52f53d8 /10.146.0.4
 ```
-
 
 ### Multi Consumer 실행
 - my-group 내에 2개의 consumer를 실행한다. 
@@ -121,7 +127,6 @@ k2:msg2
 ```
 
 
-
 ## Idempotence Producer
 ```
 > vi producer.conf
@@ -136,23 +141,6 @@ acks=all
 
 ### Delete messages in topic
 - topic 내의 시작점에서 특정 offset 까지의 범위를 삭제한다. 
-- 중간의 특정 데이터만 삭제할 수는 없음
-```
-# partition 0번의 offset 0~2 까지의 데이터를 삭제한다. 
-> bin/kafka-delete-records.sh --bootstrap-server localhost:9092 --offset-json-file ./delete-offset.json
-Executing records delete operation
-Records delete operation completed:
-partition: kv_topic-0	low_watermark: 2
-
-
-> bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kv_topic --from-beginning
-## msg3, msg4 데이터가 삭제됨
-msg1
-msg2
-msg5
-msg6
-```
-
 #### delete_offset.json
 ```json
 {
@@ -162,6 +150,27 @@ msg6
     "version":1
 }
 ```
+- 중간의 특정 데이터만 삭제할 수는 없음
+```
+# partition 0번의 offset 0~2 까지의 데이터를 삭제한다. 
+> cd $KAFKA_HOME
+> vi delete_offset.json
+
+> bin/kafka-delete-records.sh --bootstrap-server localhost:9092 --offset-json-file ./delete_offset.json
+Executing records delete operation
+Records delete operation completed:
+partition: kv_topic-0	low_watermark: 2
+
+> bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kv_topic   --partition 0   --from-beginning
+## msg3, msg4 데이터가 삭제됨
+msg5
+msg7
+msg3
+msg4
+...
+```
+
+
 
 
 ## 2. 운영관련 Command 
@@ -188,22 +197,22 @@ baseOffset: 3 lastOffset: 3 count: 1 baseSequence: -1 lastSequence: -1 producerI
 ### Topic의 partition 별로 마지막 commit 된 위치 확인
 ```
 > cat /tmp/kafka-logs/replication-offset-checkpoint
-kv_topic 0 4  <-- partition 0은 마지막 commit offset이 4
-kv_topic 1 3
+kv_topic 1 8  <-- partition 0은 마지막 commit offset이 4
+kv_topic 1 8
 ```
 
 #### 다시 데이터를 전송한 후, commit 값이 증가했는지 확인 
 ```
 > bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic kv_topic \
-> --property "parse.key=true" \
-> --property "key.separator=:" \
-> --property "print.key=true"
+ --property "parse.key=true" \
+ --property "key.separator=:" \
+ --property "print.key=true"
 >k8:msg8
 >k9:msg9
 
 > cat /tmp/kafka-logs/replication-offset-checkpoint
-kv_topic 0 6 <-- partition 0에만 위 2건이 추가된 commit 확인 가능
-kv_topic 1 3
+kv_topic 0 12 <-- partition 0에만 위 2건이 추가된 commit 확인 가능
+kv_topic 1 8
 ``` 
 
 ## 현재 Broker 설정 확인 
@@ -222,49 +231,6 @@ All configs for broker 0 are:
 .....
 ```
 
-### topic의 모든 데이터를 삭제 
-- 삭제하기 이전의 sement 파일 확인 
-```
-> ls /tmp/kafka-logs/kv_topic-0
-00000000000000000000.index  00000000000000000000.log  00000000000000000000.timeindex  00000000000000000003.snapshot  leader-epoch-checkpoint  partition.metadata
-
-> ls /tmp/kafka-logs/kv_topic-1
-00000000000000000000.index  00000000000000000000.log  00000000000000000000.timeindex  00000000000000000002.snapshot  leader-epoch-checkpoint  partition.metadata
-```
-
-- kv_topic 데이터 삭제 
-    - 직접 삭제하는 것이 아니라, 데이터를 보유하는 기간을 0으로 조정하여, 
-    - 그 이전 데이터는 broker가 자동으로 삭제
-```
-> bin/kafka-configs.sh --bootstrap-server localhost:9092 --topic kv_topic --add-config retention.ms=0 --alter
-Completed updating config for topic kv_topic.
-```
-
-- 약 5분 정도 후에 다시 segment 파일을 조회하면 기존 segment 파일(00000.log)은 삭제되고
-- partition 0는 6.log 파일이 새롭게 생성되고, 
-- partition 1은 3.log 파일이 새롭게 생성되었다. 
-
-```
-> /tmp/kafka-logs/kv_topic-0
-00000000000000000000.index.deleted  00000000000000000000.timeindex.deleted  00000000000000000006.log       leader-epoch-checkpoint
-00000000000000000000.log.deleted    00000000000000000003.snapshot           00000000000000000006.snapshot  partition.metadata
-
-> ls /tmp/kafka-logs/kv_topic-1
-00000000000000000000.index.deleted  00000000000000000000.timeindex.deleted  00000000000000000003.log       leader-epoch-checkpoint
-00000000000000000000.log.deleted    00000000000000000002.snapshot           00000000000000000003.snapshot  partition.metadata
-```
-
-- 변경했던 옵션을 삭제
-```
-> bin/kafka-configs.sh --bootstrap-server localhost:9092 --topic kv_topic --delete-config retention.ms --alter
-Completed updating config for topic kv_topic.
-
-## Config에 retention.ms 옵션이 삭제됨
-> bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic kv_topic --describe
-Topic: kv_topic	TopicId: JuKdf41ASVKbZXEKru3iLA	PartitionCount: 2	ReplicationFactor: 1	Configs: segment.bytes=1073741824
-	Topic: kv_topic	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
-	Topic: kv_topic	Partition: 1	Leader: 0	Replicas: 0	Isr: 0
-```
 
 
 ## 관련 github repository
