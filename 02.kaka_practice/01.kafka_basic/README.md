@@ -1,8 +1,12 @@
 # Apache Kafka 기본 명령어 활용 예시
 
+## Set Kafka Home Directroy to user profile 
+```
+> echo "export KAFKA_HOME=~/apps/kafka_2.12-3.0.0" >> ~/.bash_profile
+> source ~/.bash_profile
+```
+
 ## 1. Basic Command 
-
-
 
 ### Key/Value 전송
 ```
