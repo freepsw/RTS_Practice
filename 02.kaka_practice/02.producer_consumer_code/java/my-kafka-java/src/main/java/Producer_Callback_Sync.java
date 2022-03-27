@@ -14,12 +14,14 @@ public class Producer_Callback_Sync {
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(configs);
 
-        String msg = "sync producer message";
+        String msg = "Sync producer message";
         ProducerRecord<String, String> record = new ProducerRecord<>("my_topic", msg);
 
         try {
             RecordMetadata metadata = producer.send(record).get();
-            System.out.println(metadata.toString());
+            System.out.println("Record written to offset " +
+                    metadata.offset() + " timestamp " +
+                    metadata.timestamp());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {

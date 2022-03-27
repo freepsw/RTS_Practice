@@ -1,4 +1,4 @@
-# Apache Kafka Producer & Consumer 구현 
+# Apache Kafka Producer & Consumer 구현 (Python)
 - Python library (confluent-kafka)를 활용한 구현
 - https://github.com/confluentinc/confluent-kafka-python
 - https://docs.confluent.io/platform/current/clients/confluent-kafka-python/html/index.html#confluent-kafka-api
@@ -132,7 +132,7 @@ my msg
 Message delivered to my_topic [0]
 Message delivered to my_topic [0]
 Message delivered to my_topic [0]
-......
+.....
 ```
 
 
