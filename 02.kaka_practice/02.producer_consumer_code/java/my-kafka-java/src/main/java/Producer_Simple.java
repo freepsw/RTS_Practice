@@ -7,7 +7,7 @@ import java.util.Properties;
 public class Producer_Simple {
     public static void main(String[] args) {
         Properties configs = new Properties();
-        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "broker01:9092");
+        configs.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configs.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         configs.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
