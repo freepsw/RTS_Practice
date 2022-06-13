@@ -19,6 +19,7 @@ kv_topic
 test
 
 
+> cd $KAFKA_HOME
 > bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic kv_topic \
 --property "parse.key=true" \
 --property "key.separator=:" \
@@ -31,6 +32,7 @@ k5:msg5
 k6:msg6
 k7:msg7
 
+> cd $KAFKA_HOME
 > bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kv_topic --from-beginning
 msg1
 msg2
@@ -83,6 +85,7 @@ my-group        kv_topic        1          3               3               0    
 
 ## Consumer group 확인 
 ## 2개의 consumer에 각 partition 1개씩 할당되어 처리하고 있음.  
+> cd $KAFKA_HOME
 > bin/kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group my-group --describe
 
 GROUP           TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                              HOST            CLIENT-ID
@@ -91,6 +94,7 @@ my-group        kv_topic        0          9               9               0    
 
 ## Key/Value 데이터 전송 
 ## 동일한 Key 데이터가 항상 동일한 consumer로 전달 되는지 확인 가능 
+> cd $KAFKA_HOME
 > bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic kv_topic \
 --property "parse.key=true" \
 --property "key.separator=:" \
@@ -113,6 +117,7 @@ k2:msg2
 ### Consumer에서 특정 partition 데이터만 읽어오기
 - partition 옵션을 통해서 특정 partition만 읽도록 조정 가능 
 ```
+> cd $KAFKA_HOME
 > bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kv_topic \
   --partition 1 \
   --from-beginning
@@ -121,6 +126,7 @@ k2:msg2
 ### Consumer에서 특정 partition의 특정 offset 이후의 데이터만 읽어오기
 - offset 0는 from-beginning과 동일한 효과 
 ```
+> cd $KAFKA_HOME
 > bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kv_topic \
   --partition 1 \
   --offset 0
@@ -154,6 +160,17 @@ acks=all
 ```
 # partition 0번의 offset 0~2 까지의 데이터를 삭제한다. 
 > cd $KAFKA_HOME
+
+# 삭제하기 이전의 데이터 확인
+> bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kv_topic   --partition 0   --from-beginning
+msg3
+msg4
+msg5
+msg7
+msg3
+msg4
+
+# 데이터 삭제를 위한 설정 파일 생성
 > vi delete_offset.json
 
 > bin/kafka-delete-records.sh --bootstrap-server localhost:9092 --offset-json-file ./delete_offset.json
