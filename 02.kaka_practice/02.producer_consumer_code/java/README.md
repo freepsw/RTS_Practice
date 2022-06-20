@@ -35,7 +35,7 @@
 ```
 
 ## Run Producer and Consumer 
-### Run Producer 
+### Run Consumer 
 - 확인을 위한 consumer 먼저 실행
 ```
 > bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic my_topic \
@@ -60,9 +60,10 @@ Record written to offset 28 timestamp 1648373544238
 
 ```
 
-### Run Consumer 
+### Run Producer 
 - Consumer로 데이터를 전송하기 위한 producer 실행 
 ```
+> cd $KAFKA_HOME
 > bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic my_topic \
 --property "parse.key=true" \
 --property "key.separator=:" \
@@ -76,6 +77,8 @@ k5:commit_async
 ```
 
 ```
+> cd ~/RTS_Practice/02.kaka_practice/02.producer_consumer_code/java/my-kafka-java/
+
 > mvn exec:java -Dexec.mainClass="Consumer_Simple"
 
 ConsumerRecord(topic = my_topic, partition = 1, leaderEpoch = 0, offset = 25, CreateTime = 1648373795837, serialized key size = 7, serialized value size = 9, headers = RecordHeaders(headers = [], isReadOnly = false), key = sgarcia, value = gift card)
